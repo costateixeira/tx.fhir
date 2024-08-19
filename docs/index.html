@@ -208,8 +208,9 @@
         // Initialize the page with data
         fetchServerStatus('https://tx.fhir.org/ping', 'status-main-server');
         fetchServerStatus('https://tx-dev.fhir.org/ping', 'status-dev-server');
-        fetchConfig('https://raw.githubusercontent.com/costateixeira/tx.fhir/main/config/config.json', 'config-main-server-content', 'config-main-server-endpoints');
-        fetchConfig('https://raw.githubusercontent.com/costateixeira/tx.fhir/dev/config/config.json', 'config-dev-server-content', 'config-dev-server-endpoints');
+        fetchConfig('https://raw.githubusercontent.com/costateixeira/tx.fhir/main/main/config/config.json', 'config-main-server-content', 'config-main-server-endpoints');
+        fetchConfig('https://raw.githubusercontent.com/costateixeira/tx.fhir/main/dev/config/config.json', 'config-dev-server-content', 'config-dev-server-endpoints');
+
     </script>
 </body>
 </html>
