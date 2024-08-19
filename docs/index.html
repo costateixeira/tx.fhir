@@ -3,51 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FHIR Terminology Services</title>
+    <title>FHIR Terminology Services Status</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 20px;
+        }
+        .tabs {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            cursor: pointer;
         }
-        #status-container {
-            background-color: #fff;
+        .tab {
+            padding: 10px 20px;
+            background-color: #e0e0e0;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+        }
+        .tab.active {
+            background-color: #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
+        .tab-content {
+            background-color: #ffffff;
             padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            border: 1px solid #e0e0e0;
+            border-radius: 0 5px 5px 5px;
+            display: none;
         }
-        #status-container h1 {
-            margin: 0 0 20px;
+        .tab-content.active {
+            display: block;
         }
         #status {
-            font-size: 24px;
+            font-size: 18px;
             color: #333;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #e0e0e0;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f9f9f9;
+        }
+        .links {
+            margin-top: 20px;
+        }
+        .links a {
+            display: block;
+            color: #007bff;
+            text-decoration: none;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <div id="status-container">
-        <h1>FHIR Terminology Services Status</h1>
-        <p id="status">Loading...</p>
+
+    <div class="tabs">
+        <div class="tab active" data-tab="main-server">Main Server (Tx.fhir.org)</div>
+        <div class="tab" data-tab="dev-server">Dev Server (tx-dev.fhir.org)</div>
+    </div>
+
+    <div id="main-server" class="tab-content active">
+        <div id="status-main-server">
+            <strong>Status:</strong> Loading...
+        </div>
+        <h2>Configuration</h2>
+        <table id="config-main-server-content">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Content will be populated by JavaScript -->
+            </tbody>
+        </table>
+        <h2>Endpoints</h2>
+        <table id="config-main-server-endpoints">
+            <thead>
+                <tr>
+                    <th>Path</th>
+                    <th>Type</th>
+                    <th>Mode</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Content will be populated by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div id="dev-server" class="tab-content">
+        <div id="status-dev-server">
+            <strong>Status:</strong> Loading...
+        </div>
+        <h2>Configuration</h2>
+        <table id="config-dev-server-content">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Content will be populated by JavaScript -->
+            </tbody>
+        </table>
+        <h2>Endpoints</h2>
+        <table id="config-dev-server-endpoints">
+            <thead>
+                <tr>
+                    <th>Path</th>
+                    <th>Type</th>
+                    <th>Mode</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Content will be populated by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="links">
+        <h2>Related Resources</h2>
+        <a href="https://costateixeira.github.io/tx.content" target="_blank">Terminology Content IG (Publication)</a>
+        <a href="https://github.com/costateixeira/tx.content" target="_blank">Terminology Content IG (Source)</a>
+        <a href="https://costateixeira.github.io/tx.management" target="_blank">Terminology Management IG (Publication)</a>
+        <a href="https://github.com/costateixeira/tx.management" target="_blank">Terminology Management IG (Source)</a>
+        <a href="https://github.com/orgs/hl7-eu/projects/7" target="_blank">Terminology Backlog</a>
     </div>
 
     <script>
-        // Add your JavaScript here to fetch and display the FHIR Terminology Services status
-        // Example:
-        // fetch('API_ENDPOINT')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         document.getElementById('status').innerText = data.status;
-        //     })
-        //     .catch(error => {
-        //         document.getElementById('status').innerText = 'Error fetching status';
-        //     });
+        // JavaScript to handle tabs
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+            });
+        });
+
+        // Fetch and display server status
+        function fetchServerStatus(url, elementId) {
+            fetch(url)
+                .then(response => response.ok ? 'Online' : 'Offline')
+                .then(status => {
+                    document.getElementById(elementId).innerHTML = `<strong>Status:</strong> ${status}`;
+                })
+                .catch(() => {
+                    document.getElementById(elementId).innerHTML = `<strong>Status:</strong> Error fetching status`;
+                });
+        }
+
+        // Fetch and display config.json details
+        function fetchConfig(url, contentElementId, endpointsElementId) {
+            fetch(url)
+                .then(response => response.json())
+                .then(config => {
+                    const contentTable = document.getElementById(contentElementId).querySelector('tbody');
+                    const endpointsTable = document.getElementById(endpointsElementId).querySelector('tbody');
+
+                    // Populate history
+                    config.history.forEach(entry => {
+                        const row = document.createElement('tr');
+                        entry.forEach(item => {
+                            const cell = document.createElement('td');
+                            cell.textContent = item;
+                            row.appendChild(cell);
+                        });
+                        contentTable.appendChild(row);
+                    });
+
+                    // Populate endpoints
+                    Object.values(config.endpoints).forEach(endpoint => {
+                        const row = document.createElement('tr');
+                        ['path', 'type', 'mode'].forEach(key => {
+                            const cell = document.createElement('td');
+                            cell.textContent = endpoint[key] || '';
+                            row.appendChild(cell);
+                        });
+                        endpointsTable.appendChild(row);
+                    });
+                })
+                .catch(() => {
+                    document.getElementById(contentElementId).innerHTML = '<tr><td colspan="3">Error loading configuration</td></tr>';
+                    document.getElementById(endpointsElementId).innerHTML = '<tr><td colspan="3">Error loading endpoints</td></tr>';
+                });
+        }
+
+        // Initialize the page with data
+        fetchServerStatus('https://tx.fhir.org/ping', 'status-main-server');
+        fetchServerStatus('https://tx-dev.fhir.org/ping', 'status-dev-server');
+        fetchConfig('https://raw.githubusercontent.com/costateixeira/tx.fhir/main/config/config.json', 'config-main-server-content', 'config-main-server-endpoints');
+        fetchConfig('https://raw.githubusercontent.com/costateixeira/tx.fhir/dev/config/config.json', 'config-dev-server-content', 'config-dev-server-endpoints');
     </script>
 </body>
 </html>
