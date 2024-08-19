@@ -1,0 +1,164 @@
+{
+    "history" : [
+      [ "11-08-2021",  "Grahame Grieve",  "Updated version of NDC to combined NDC build to pick up old codes" ],
+      [ "11-08-2021",  "Grahame Grieve",  "Updated version of NDC to combined NDC build to pick up old codes" ],
+      [ "11-10-2021",  "Grahame Grieve",  "Add fhir.dicom to the package list" ],
+      [ "11-12-2021",  "Rob Hausam",      "Update SNOMED CT Canadian Edition to 20210930 version." ],
+      [ "03-31-2022",  "Rob Hausam",      "Update SNOMED CT US Edition to 20220301 version." ],
+      [ "04-05-2022",  "Rob Hausam",      "Update SNOMED CT International Edition to 20220331 version.  Update LOINC to 2.72 version." ],
+      [ "04-23-2022",  "Rob Hausam",      "Add SNOMED CT International Edition 20220131 version." ],
+      [ "05-14-2022",  "Rob Hausam",      "Update SNOMED CT Canadian Edition to 20220331 version." ],
+      [ "05-19-2022",  "Grahame Grieve",  "Add VSAC & PhinVads" ],
+      [ "06-22-2022",  "Rob Hausam",      "Re-configured support for SNOMED CT Intl. Edition 20210731 (for IPS)." ],
+      [ "07-08-2022",  "Rob Hausam",      "Update SNOMED CT Belgian extension to 20220315 version (based on 20220131 Intl. Edition)." ],
+      [ "07-27-2022",  "Rob Hausam",      "Update RxNorm to 2022-07-05 version." ],
+      [ "07-31-2022",  "Rob Hausam",      "Remove unneeded SNOMED CT versions." ],
+      [ "08-01-2022",  "Rob Hausam",      "Update SNOMED CT AU Edition to version 20220731." ],
+      [ "08-01-2022",  "Rob Hausam",      "Update SNOMED CT International Edition to version 20220731." ],
+      [ "08-23-2022",  "Rob Hausam",      "Update LOINC to version 2.73." ],
+      [ "09-11-2022",  "Rob Hausam",      "Update SNOMED CT US Edition to version 20220901." ],
+      [ "11-16-2022",  "Rob Hausam",      "Update SNOMED CT CA Edition to version 20220930." ],
+      [ "11-16-2022",  "Rob Hausam",      "Update SNOMED CT NL Edition to version 20220930 and BE Edition to version 20221115." ],
+      [ "04-15-2023",  "Rob Hausam",      "Update SNOMED CT International Edition to version 20230131 and US Edition to version 20230301." ],
+      [ "04-30-2023",  "Grahame Grieve",  "Update LOINC to version 2.74." ],
+      [ "05-06-2023",  "Grahame Grieve",  "Update LOINC to version 2.74 (a). (Fix multi-heirarchy import)" ],
+      [ "05-08-2023",  "Rob Hausam",      "Add SNOMED CT Swiss extension (20221207 version) (based on 20221031 Intl. Edition)." ],
+      [ "06-22-2023",  "Rob Hausam",      "Update SNOMED CT Swiss extension to 20230607 version (based on the 20230430 Intl. Edition)." ],
+      [ "06-27-2023",  "Rob Hausam",      "Add SNOMED CT UK Monolith Edition 20230412 version.  Re-ordered country-specific content entries alphabetically." ],
+      [ "08-07-2023",  "Rob Hausam",      "Update SNOMED CT International Edition to version 20230731.  Remove support for 20190731, 20200731 and 20210731 versions.  Continue to support 20230131 version.  Update NL Edition to version 20230331." ],
+      [ "09-08-2023",  "Grahame Grieve",  "Add CPT 2023 Fragment" ],
+      [ "17-08-2023",  "Grahame Grieve",  "Add omop_20230531_a" ],
+      [ "09-09-2023",  "Rob Hausam",      "Update SNOMED CT AU Edition to version 20230731 and US Edition to version 20230901." ],
+      [ "09-12-2023",  "Rob Hausam",      "Update SNOMED CT International Edition to version 20230901 and continue to support the 20230731 and 20230131 versions." ],
+      [ "10-23-2023",  "Rob Hausam",      "Add support for SNOMED CT IPS Terminology version 20221130." ],
+      [ "12-11-2023",  "Rob Hausam",      "Update SNOMED CT Belgian Edition to version 20231115." ],
+      [ "11-01-2024",  "Grahame Grieve",  "Add R5 and Tx-Registry End-points (mode=test for the latter)." ],
+      [ "30-01-2024",  "Grahame Grieve",  "Make /snomed end-point test-only while performance issues are resolved." ],
+      [ "02-21-2024",  "Rob Hausam",      "Update SNOMED CT Swedish Extension to version 20231130 and add version 20220531." ],
+      [ "02-21-2024",  "Rob Hausam",      "Update SNOMED CT International Extension to version 20240201 and LOINC to version 2.77." ],
+      [ "07-27-2024",  "Rob Hausam",      "Update SNOMED CT US Edition to 20240301 version." ],
+      [ "07-27-2024",  "Rob Hausam",      "Change LOINC entry to loinc-2.77.db (not .cache)." ],
+      [ "08-04-2024",  "Grahame Grieve",  "Change LOINC entry to loinc-2.77-a.db." ],
+      [ "08-09-2024",  "Rob Hausam",      "Update SNOMED CT Danish Extension to version 20240331." ]
+    ],
+    "content" : {
+      "uv" : {
+        "files" : {
+          "loinc-2.77-a.db" : "loinc",
+          "rxnorm-20220705.db" : "rxnorm",
+          "ndc-20211101.db" : "ndc",
+          "unii-20210810.db" : "unii",
+          "sct_intl_20240201.cache" : "snomed!",
+          "ucum-essence-2.0.1.xml" : "ucum",
+          "cpt-2023-fragment-0.1.db" : "cpt",
+          "omop_20230531_a.db" : "omop"
+        },
+        "packages" : {
+          "r5" : [
+            "hl7.terminology.r4",
+            "fhir.tx.support.r4",
+            "ihe.formatcode.fhir",
+            "fhir.dicom"
+          ],
+          "r4" : [
+            "hl7.terminology.r4",
+            "fhir.tx.support.r4",
+            "ihe.formatcode.fhir",
+            "fhir.dicom"
+          ],
+          "r3" : [
+            "hl7.terminology.r3#4.0.0",
+            "fhir.tx.support.r3"
+          ],
+          "r2" : [
+            "fhir.tx.support.r2"
+          ]
+        }
+      },
+      "old" : {
+        "files" : {
+          "sct_intl_20230131.cache" : "snomed",
+          "sct_intl_20230731.cache" : "snomed",
+          "sct_se_20220531.cache" : "snomed"
+        }
+      },
+      "au" : {
+        "files" : {
+          "sct_au_20230731.cache" : "snomed"
+        }
+      },
+      "be" : {
+        "files" : {
+          "sct_be_20231115.cache" : "snomed"
+        }
+      },
+      "ca" : {
+        "files" : {
+          "sct_ca_20220930.cache" : "snomed"
+        }
+      },
+      "ch" : {
+        "files" : {
+          "sct_ch_20230607.cache" : "snomed"
+        }
+      },
+      "dk" : {
+        "files" : {
+          "sct_dk_20240331.cache" : "snomed"
+        }
+      },
+      "ips" : {
+        "files" : {
+          "sct_ips_20221130.cache" : "snomed"
+        }
+      },
+      "nl" : {
+        "files" : {
+          "sct_nl_20230331.cache" : "snomed"
+        }
+      },
+      "se" : {
+        "files" : {
+          "sct_se_20231130.cache" : "snomed"
+        }
+      },
+      "uk" : {
+        "files" : {
+          "sct_uk_20230412.cache" : "snomed"
+        }
+      },
+      "us" : {
+        "files" : {
+          "sct_us_20240301.cache" : "snomed"
+        },
+        "packages" : {
+          "r4" : [
+            "hl7.fhir.us.core",
+            "us.nlm.vsac",
+            "us.cdc.phinvads",
+            "hl7.fhir.uv.sdc"
+          ]
+        }
+      }
+    },
+    "endpoints" : {
+      "snomed" : {
+        "path" : "/snomed",
+        "type" : "snomed",
+        "mode" : "test"
+      },
+      "ln" : {
+        "path" : "/loinc",
+        "type" : "loinc"
+      },
+      "txreg" : {
+        "path" : "/tx-reg",
+        "type" : "tx-registry"
+      },
+      "cache" : {
+        "path" : "/post/tx-cache",
+        "type" : "folder",
+        "folder" : "E:\\tx-cache\\tx-cache"
+      }
+    }
+  }
