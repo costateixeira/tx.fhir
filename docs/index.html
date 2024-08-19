@@ -81,9 +81,9 @@
         <table id="config-main-server-content">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Author</th>
-                    <th>Description</th>
+                    <th>Group</th>
+                    <th>File</th>
+                    <th>Type</th>
                 </tr>
             </thead>
             <tbody>
@@ -113,9 +113,9 @@
         <table id="config-dev-server-content">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Author</th>
-                    <th>Description</th>
+                    <th>Group</th>
+                    <th>File</th>
+                    <th>Type</th>
                 </tr>
             </thead>
             <tbody>
@@ -177,16 +177,16 @@
                     const contentTable = document.getElementById(contentElementId).querySelector('tbody');
                     const endpointsTable = document.getElementById(endpointsElementId).querySelector('tbody');
 
-                    // Populate history
-                    config.history.forEach(entry => {
-                        const row = document.createElement('tr');
-                        entry.forEach(item => {
-                            const cell = document.createElement('td');
-                            cell.textContent = item;
-                            row.appendChild(cell);
-                        });
-                        contentTable.appendChild(row);
-                    });
+                    // Populate content
+                    for (const [group, data] of Object.entries(config.content)) {
+                        if (data.files) {
+                            for (const [file, type] of Object.entries(data.files)) {
+                                const row = document.createElement('tr');
+                                row.innerHTML = `<td>${group}</td><td>${file}</td><td>${type}</td>`;
+                                contentTable.appendChild(row);
+                            }
+                        }
+                    }
 
                     // Populate endpoints
                     Object.values(config.endpoints).forEach(endpoint => {
@@ -206,11 +206,10 @@
         }
 
         // Initialize the page with data
-        fetchServerStatus('https://tx.fhir.org/ping', 'status-main-server');
-        fetchServerStatus('https://tx-dev.fhir.org/ping', 'status-dev-server');
+        fetchServerStatus('https://tx.fhir.org/metadata', 'status-main-server');
+        fetchServerStatus('https://tx-dev.fhir.org/metadata', 'status-dev-server');
         fetchConfig('https://raw.githubusercontent.com/costateixeira/tx.fhir/main/main/config/config.json', 'config-main-server-content', 'config-main-server-endpoints');
         fetchConfig('https://raw.githubusercontent.com/costateixeira/tx.fhir/main/dev/config/config.json', 'config-dev-server-content', 'config-dev-server-endpoints');
-
     </script>
 </body>
 </html>
